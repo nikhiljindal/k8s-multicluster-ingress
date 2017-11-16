@@ -37,10 +37,10 @@ desc "Look at kubemci create help"
 run "${KUBEMCI} create -h"
 
 desc "Create a multicluster load balancer zoneprinter-lb"
-run "${KUBEMCI} create zoneprinter-lb --ingress=../examples/zone-printer/ingress/nginx.yaml --gcp-project=kubemci-demo-project --kubeconfig=zpkubeconfig"
+run "${KUBEMCI} create zoneprinter-lb --ingress=../examples/zone-printer/ingress/nginx.yaml --gcp-project=new-kube-gcp-project2 --kubeconfig=zpkubeconfig"
 
 desc "Get status of the load balancer"
-run "${KUBEMCI} get-status zoneprinter-lb --gcp-project=kubemci-demo-project"
+run "${KUBEMCI} get-status zoneprinter-lb --gcp-project=new-kube-gcp-project2"
 
 desc "Hit the IP address from US cluster"
 run "${KUBECTLus} run -i --tty busybox --image=busybox --restart=Never -- wget -qO- http://35.190.81.146/"
@@ -55,7 +55,7 @@ desc "Hit the IP address again from EU cluster"
 run "${KUBECTLeu} run -i --tty busybox2 --image=busybox --restart=Never -- wget -qO- http://35.190.81.146/"
 
 desc "Delete multicluster load balancer"
-run "${KUBEMCI} delete zoneprinter-lb --ingress=../examples/zone-printer/ingress/nginx.yaml --gcp-project=kubemci-demo-project --kubeconfig=zpkubeconfig"
+run "${KUBEMCI} delete zoneprinter-lb --ingress=../examples/zone-printer/ingress/nginx.yaml --gcp-project=new-kube-gcp-project2 --kubeconfig=zpkubeconfig"
 
 desc "Delete the zone printer app from both clusters"
 run "${KUBECTLus} delete -f ../examples/zone-printer/app/"
